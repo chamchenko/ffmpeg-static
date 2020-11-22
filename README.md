@@ -44,7 +44,7 @@ Build in docker
 
     $ docker build -t ffmpeg-static .
     $ docker run -it ffmpeg-static
-    $ ./build.sh [-j <jobs>] [-B] [-d]
+    $ ./build-ubuntu.sh [-j <jobs>] [-B] [-d]
 
 The binaries will be created in `/ffmpeg-static/bin` directory.
 Method of getting them out of the Docker container is up to you.
