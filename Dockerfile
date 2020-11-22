@@ -7,7 +7,7 @@ RUN apt-get update && apt-get -y --force-yes install autoconf automake build-ess
   && rm -rf /var/lib/apt/lists/*
 
 # Copy the build scripts.
-COPY build.sh download.pl env.source fetchurl /FFMPEG-CHAMCHENKO/
+COPY build-ubuntu.sh build.sh download.pl env.source fetchurl /FFMPEG-CHAMCHENKO/
 
 VOLUME /FFMPEG-CHAMCHENKO
 WORKDIR /FFMPEG-CHAMCHENKO
