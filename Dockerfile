@@ -1,52 +1,14 @@
-FROM ubuntu:bionic
+FROM ubuntu:trusty
 
-# Basic packages needed to download dependencies and unpack them.
-RUN apt-get update && apt-get install -y \
-  bzip2 \
-  perl \
-  tar \
-  wget \
-  xz-utils \
-  && rm -rf /var/lib/apt/lists/*
-
-# Install packages necessary for compilation.
-RUN apt-get update && apt-get install -y \
-  autoconf \
-  automake \
-  bash \
-  build-essential \
-  cmake \
-  curl \
-  frei0r-plugins-dev \
-  gawk \
-  libfontconfig-dev \
-  libfreetype6-dev \
-  libopencore-amrnb-dev \
-  libopencore-amrwb-dev \
-  libsdl2-dev \
-  libspeex-dev \
-  libtheora-dev \
-  libtool \
-  libva-dev \
-  libvdpau-dev \
-  libvo-amrwbenc-dev \
-  libvorbis-dev \
-  libwebp-dev \
-  libxcb1-dev \
-  libxcb-shm0-dev \
-  libxcb-xfixes0-dev \
-  libxvidcore-dev \
-  lsb-release \
-  pkg-config \
-  sudo \
-  tar \
-  texi2html \
-  yasm \
+RUN apt-get update && apt-get -y --force-yes install autoconf automake build-essential libfreetype6-dev libgpac-dev \
+  libsdl1.2-dev libtheora-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev \
+  libxcb-xfixes0-dev pkg-config texi2html zlib1g-dev libvpx-dev \
+  libharfbuzz-dev libfontconfig-dev  git wget gperf \
   && rm -rf /var/lib/apt/lists/*
 
 # Copy the build scripts.
-COPY build.sh download.pl env.source fetchurl /ffmpeg-static/
+COPY build.sh download.pl env.source fetchurl /FFMPEG-CHAMCHENKO/
 
-VOLUME /ffmpeg-static
-WORKDIR /ffmpeg-static
+VOLUME /FFMPEG-CHAMCHENKO
+WORKDIR /FFMPEG-CHAMCHENKO
 CMD /bin/bash
