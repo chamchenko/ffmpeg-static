@@ -82,7 +82,7 @@ cd $BUILD_DIR
   "yasm-1.3.0.tar.gz" \
   "" \
   "fc9e586751ff789b34b1f21d572d96af" \
-  "http://www.tortall.net/projects/yasm/releases/"
+  "http://sources.openelec.tv/mirror/yasm/"
 
 [ $is_x86 -eq 1 ] && download \
   "nasm-2.14.02.tar.bz2" \
@@ -212,10 +212,44 @@ download \
   "https://github.com/xiph/speex/archive/"
 
 download \
-  "n4.0.tar.gz" \
-  "ffmpeg4.0.tar.gz" \
-  "4749a5e56f31e7ccebd3f9924972220f" \
+  "nv-codec-headers-10.0.26.1.tar.gz" \
+  "" \
+  "3a03278add71444aded87aa7189c566d" \
+  "https://github.com/FFmpeg/nv-codec-headers/releases/download/n10.0.26.1/"
+
+download \
+  "freetype-2.10.2.tar.gz" \
+  "" \
+  "b1cb620e4c875cd4d1bfa04945400945" \
+  "https://download.savannah.gnu.org/releases/freetype/"
+
+download \
+  "fontconfig-2.13.92.tar.gz" \
+  "" \
+  "eda1551685c25c4588da39222142f063" \
+  "https://www.freedesktop.org/software/fontconfig/release/"
+
+download \
+  "opencore-amr-0.1.3.tar.xz" \
+  "" \
+  "3a0bc1092000dba56819cfaf263b981b" \
+  "https://johnvansickle.com/ffmpeg/git-source/"
+
+download \
+  "vo-amrwbenc-0.1.3.tar.xz" \
+  "" \
+  "f2103c3a3aee75d6b18a0b61e05046fa" \
+  "https://johnvansickle.com/ffmpeg/git-source/"
+
+download \
+  "n4.3.1.tar.gz" \
+  "" \
+  "426ca412ca61634a248c787e29507206" \
   "https://github.com/FFmpeg/FFmpeg/archive"
+
+
+
+
 
 [ $download_only -eq 1 ] && exit 0
 
@@ -411,9 +445,46 @@ cd $BUILD_DIR/speex*
 make -j $jval
 make install
 
+echo "*** Building nv-codec ***"
+cd $BUILD_DIR/nv-codec*
+[ $rebuild -eq 1 -a -f Makefile ] && make distclean || true
+sed -i "s#\/usr\/local#$TARGET_DIR#g" Makefile
+make -j $jval
+make install
+
+echo "*** Building freetype ***"
+cd $BUILD_DIR/freetype*
+[ $rebuild -eq 1 -a -f Makefile ] && make distclean || true
+./configure
+make -j $jval
+make install
+
+echo "*** Building fontconfig ***"
+cd $BUILD_DIR/fontconfig*
+[ $rebuild -eq 1 -a -f Makefile ] && make distclean || true
+./configure --prefix=$TARGET_DIR --disable-shared
+make -j $jval
+make install
+
+echo "*** Building opencore ***"
+cd $BUILD_DIR/opencore*
+[ $rebuild -eq 1 -a -f Makefile ] && make distclean || true
+./configure --prefix=$TARGET_DIR --disable-shared
+make -j $jval
+make install
+
+echo "*** Building vo-amrwbenc ***"
+cd $BUILD_DIR/vo-amrwbenc*
+[ $rebuild -eq 1 -a -f Makefile ] && make distclean || true
+autoreconf -fiv
+[ ! -f config.status ] && ./configure --prefix=$TARGET_DIR --disable-shared
+make -j $jval
+make install
+
 # FFMpeg
 echo "*** Building FFmpeg ***"
 cd $BUILD_DIR/FFmpeg*
+sed -i "s#_flags_filter\=echo#_flags_filter\='filter_out\ \-lm\|\-ldl'#g" configure
 [ $rebuild -eq 1 -a -f Makefile ] && make distclean || true
 
 if [ "$platform" = "linux" ]; then
@@ -424,12 +495,17 @@ if [ "$platform" = "linux" ]; then
     --extra-cflags="-I$TARGET_DIR/include" \
     --extra-ldflags="-L$TARGET_DIR/lib" \
     --extra-libs="-lpthread -lm -lz" \
-    --extra-ldexeflags="-static" \
+    --extra-ldexeflags="-Wl,-Bstatic" \
+    --extra-libs="-Wl,-Bdynamic -lm -ldl" \
+    --extra-version=CHAMCHENKO \
     --bindir="$BIN_DIR" \
     --enable-pic \
     --enable-ffplay \
     --enable-fontconfig \
     --enable-frei0r \
+    --enable-ffnvcodec \
+    --enable-cuvid \
+    --enable-nvenc \
     --enable-gpl \
     --enable-version3 \
     --enable-libass \
@@ -464,12 +540,17 @@ elif [ "$platform" = "darwin" ]; then
     --pkg-config-flags="--static" \
     --extra-cflags="-I$TARGET_DIR/include" \
     --extra-ldflags="-L$TARGET_DIR/lib" \
-    --extra-ldexeflags="-Bstatic" \
+    --extra-ldexeflags="-Wl,-Bstatic" \
+    --extra-libs="-Wl,-Bdynamic -lm -ldl"
+    --extra-version=CHAMCHENKO \
     --bindir="$BIN_DIR" \
     --enable-pic \
     --enable-ffplay \
     --enable-fontconfig \
     --enable-frei0r \
+    --enable-ffnvcodec \
+    --enable-cuvid \
+    --enable-nvenc \
     --enable-gpl \
     --enable-version3 \
     --enable-libass \
@@ -484,7 +565,9 @@ elif [ "$platform" = "darwin" ]; then
     --enable-librtmp \
     --enable-libsoxr \
     --enable-libspeex \
+    --enable-libtheora \
     --enable-libvidstab \
+    --enable-libvo-amrwbenc \
     --enable-libvorbis \
     --enable-libvpx \
     --enable-libwebp \
