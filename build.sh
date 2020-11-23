@@ -224,9 +224,9 @@ download \
   "https://download.savannah.gnu.org/releases/freetype/"
 
 download \
-  "fontconfig-2.13.92.tar.gz" \
+  "fontconfig-2.12.1.tar.gz" \
   "" \
-  "eda1551685c25c4588da39222142f063" \
+  "nil" \
   "https://www.freedesktop.org/software/fontconfig/release/"
 
 download \
@@ -240,6 +240,18 @@ download \
   "" \
   "f2103c3a3aee75d6b18a0b61e05046fa" \
   "https://johnvansickle.com/ffmpeg/git-source/"
+
+download \
+  "xvidcore-1.3.7.tar.gz" \
+  "" \
+  "nil" \
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
+
+download \
+  "frei0r-plugins-1.4.tar.xz" \
+  "" \
+  "nil" \
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
   "n4.3.1.tar.gz" \
@@ -282,6 +294,27 @@ elif [ "$platform" = "linux" ]; then
   PATH="$BIN_DIR:$PATH" ./config --prefix=$TARGET_DIR
 fi
 PATH="$BIN_DIR:$PATH" make -j $jval
+make install
+
+echo "*** Building freetype ***"
+cd $BUILD_DIR/freetype*
+[ $rebuild -eq 1 -a -f Makefile ] && make distclean || true
+./configure
+make -j $jval
+make install
+
+echo "*** Building fontconfig ***"
+cd $BUILD_DIR/fontconfig*
+[ $rebuild -eq 1 -a -f Makefile ] || true
+./configure --disable-shared
+make -j $jval
+make install
+
+echo "*** Building fontconfig ***"
+cd $BUILD_DIR/fontconfig*
+[ $rebuild -eq 1 -a -f Makefile ] && make distclean || true
+./configure --prefix=$TARGET_DIR --disable-shared
+make -j $jval
 make install
 
 echo "*** Building zlib ***"
@@ -452,16 +485,9 @@ sed -i "s#\/usr\/local#$TARGET_DIR#g" Makefile
 make -j $jval
 make install
 
-echo "*** Building freetype ***"
-cd $BUILD_DIR/freetype*
-[ $rebuild -eq 1 -a -f Makefile ] && make distclean || true
-./configure
-make -j $jval
-make install
-
 echo "*** Building fontconfig ***"
 cd $BUILD_DIR/fontconfig*
-[ $rebuild -eq 1 -a -f Makefile ]
+[ $rebuild -eq 1 -a -f Makefile ] || true
 ./configure --prefix=$TARGET_DIR --disable-shared
 make -j $jval
 make install
@@ -481,6 +507,21 @@ autoreconf -fiv
 make -j $jval
 make install
 
+echo "*** Building xvidcore ***"
+cd $BUILD_DIR/xvidcore*
+[ $rebuild -eq 1 -a -f Makefile ] && make distclean || true
+[ ! -f config.status ] && ./configure --prefix=$TARGET_DIR
+make -j $jval
+make install
+
+echo "*** Building frei0r-plugins ***"
+cd $BUILD_DIR/frei0r*
+mkdir build && cd build
+[ $rebuild -eq 1 -a -f Makefile ] && make distclean || true
+cmake -DCMAKE_INSTALL_PREFIX=$TARGET_DIR -DCMAKE_BUILD_TYPE=Release -DWITHOUT_OPENCV=TRUE -Wno-dev ..
+make -j $jval
+make install
+
 # FFMpeg
 echo "*** Building FFmpeg ***"
 cd $BUILD_DIR/FFmpeg*
@@ -494,13 +535,12 @@ if [ "$platform" = "linux" ]; then
     --pkg-config-flags="--static" \
     --extra-cflags="-I$TARGET_DIR/include" \
     --extra-ldflags="-L$TARGET_DIR/lib" \
-    --extra-libs="-lpthread -lm -lz" \
+    --extra-libs="-Wl,-Bdynamic -lm -ldl -lpthread -lm -lz " \
     --extra-ldexeflags="-Wl,-Bstatic" \
-    --extra-libs="-Wl,-Bdynamic -lm -ldl" \
     --extra-version=CHAMCHENKO \
     --bindir="$BIN_DIR" \
     --enable-pic \
-    --enable-ffplay \
+    --disable-ffplay \
     --enable-fontconfig \
     --enable-frei0r \
     --enable-ffnvcodec \
@@ -540,12 +580,12 @@ elif [ "$platform" = "darwin" ]; then
     --pkg-config-flags="--static" \
     --extra-cflags="-I$TARGET_DIR/include" \
     --extra-ldflags="-L$TARGET_DIR/lib" \
+    --extra-libs="-lpthread -lm -lz -Wl,-Bdynamic -lm -ldl" \
     --extra-ldexeflags="-Wl,-Bstatic" \
-    --extra-libs="-Wl,-Bdynamic -lm -ldl"
     --extra-version=CHAMCHENKO \
     --bindir="$BIN_DIR" \
     --enable-pic \
-    --enable-ffplay \
+    --disable-ffplay \
     --enable-fontconfig \
     --enable-frei0r \
     --enable-ffnvcodec \
