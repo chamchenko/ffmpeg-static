@@ -461,7 +461,7 @@ make install
 
 echo "*** Building fontconfig ***"
 cd $BUILD_DIR/fontconfig*
-[ $rebuild -eq 1 -a -f Makefile ] && make distclean || true
+[ $rebuild -eq 1 -a -f Makefile ]
 ./configure --prefix=$TARGET_DIR --disable-shared
 make -j $jval
 make install
