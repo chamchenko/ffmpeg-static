@@ -161,7 +161,7 @@ download \
   "rtmpdump-2.3.tgz" \
   "" \
   "eb961f31cd55f0acf5aad1a7b900ef59" \
-  "hhttps://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
   "soxr-0.1.2-Source.tar.xz" \
