@@ -82,182 +82,182 @@ cd $BUILD_DIR
   "yasm-1.3.0.tar.gz" \
   "" \
   "fc9e586751ff789b34b1f21d572d96af" \
-  "http://sources.openelec.tv/mirror/yasm/"
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 [ $is_x86 -eq 1 ] && download \
   "nasm-2.14.02.tar.bz2" \
   "" \
   "3f489aa48ad2aa1f967dc5e293bbd06f" \
-  "https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/"
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
   "OpenSSL_1_0_2o.tar.gz" \
   "" \
   "5b5c050f83feaa0c784070637fac3af4" \
-  "https://github.com/openssl/openssl/archive/"
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
-  "v1.2.11.tar.gz" \
   "zlib-1.2.11.tar.gz" \
+  "" \
   "0095d2d2d1f3442ce1318336637b695f" \
-  "https://github.com/madler/zlib/archive/"
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
   "x264-stable.tar.gz" \
   "" \
-  "nil" \
-  "https://code.videolan.org/videolan/x264/-/archive/stable/"
+  "82ad96b9367ab7bab22a2eea1a4702aa" \
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
   "x265_2.7.tar.gz" \
   "" \
   "b0d7d20da2a418fa4f53a559946ea079" \
-  "http://download.openpkg.org/components/cache/x265/"
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
-  "v0.1.6.tar.gz" \
   "fdk-aac.tar.gz" \
+  "" \
   "223d5f579d29fb0d019a775da4e0e061" \
-  "https://github.com/mstorsjo/fdk-aac/archive"
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 # libass dependency
 download \
   "harfbuzz-1.4.6.tar.bz2" \
   "" \
   "e246c08a3bac98e31e731b2a1bf97edf" \
-  "https://www.freedesktop.org/software/harfbuzz/release/"
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
   "fribidi-1.0.2.tar.bz2" \
   "" \
   "bd2eb2f3a01ba11a541153f505005a7b" \
-  "https://github.com/fribidi/fribidi/releases/download/v1.0.2/"
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
-  "0.13.6.tar.gz" \
   "libass-0.13.6.tar.gz" \
-  "nil" \
-  "https://github.com/libass/libass/archive/"
+  "" \
+  "cd16c45094970cb35b278a8540e203b1" \
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
   "lame-3.99.5.tar.gz" \
   "" \
   "84835b313d4a8b68f5349816d33e07ce" \
-  "http://downloads.sourceforge.net/project/lame/lame/3.99"
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
   "opus-1.1.2.tar.gz" \
   "" \
   "1f08a661bc72930187893a07f3741a91" \
-  "https://github.com/xiph/opus/releases/download/v1.1.2"
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
-  "v1.6.1.tar.gz" \
   "vpx-1.6.1.tar.gz" \
+  "" \
   "b0925c8266e2859311860db5d76d1671" \
-  "https://github.com/webmproject/libvpx/archive"
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
   "rtmpdump-2.3.tgz" \
   "" \
   "eb961f31cd55f0acf5aad1a7b900ef59" \
-  "https://rtmpdump.mplayerhq.hu/download/"
+  "hhttps://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
   "soxr-0.1.2-Source.tar.xz" \
   "" \
   "0866fc4320e26f47152798ac000de1c0" \
-  "https://sourceforge.net/projects/soxr/files/"
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
-  "release-0.98b.tar.gz" \
   "vid.stab-release-0.98b.tar.gz" \
-  "299b2f4ccd1b94c274f6d94ed4f1c5b8" \
-  "https://github.com/georgmartius/vid.stab/archive/"
-
-download \
-  "release-2.7.4.tar.gz" \
-  "zimg-release-2.7.4.tar.gz" \
-  "1757dcc11590ef3b5a56c701fd286345" \
-  "https://github.com/sekrit-twc/zimg/archive/"
-
-download \
-  "v2.1.2.tar.gz" \
-  "openjpeg-2.1.2.tar.gz" \
-  "40a7bfdcc66280b3c1402a0eb1a27624" \
-  "https://github.com/uclouvain/openjpeg/archive/"
-
-download \
-  "v0.6.1.tar.gz" \
-  "libwebp-0.6.1.tar.gz" \
-  "1c3099cd2656d0d80d3550ee29fc0f28" \
-  "https://github.com/webmproject/libwebp/archive/"
-
-download \
-  "v1.3.6.tar.gz" \
-  "vorbis-1.3.6.tar.gz" \
-  "03e967efb961f65a313459c5d0f4cbfb" \
-  "https://github.com/xiph/vorbis/archive/"
-
-download \
-  "v1.3.3.tar.gz" \
-  "ogg-1.3.3.tar.gz" \
-  "b8da1fe5ed84964834d40855ba7b93c2" \
-  "https://github.com/xiph/ogg/archive/"
-
-download \
-  "Speex-1.2.0.tar.gz" \
-  "Speex-1.2.0.tar.gz" \
-  "4bec86331abef56129f9d1c994823f03" \
-  "https://github.com/xiph/speex/archive/"
-
-download \
-  "nv-codec-headers-10.0.26.1.tar.gz" \
   "" \
-  "3a03278add71444aded87aa7189c566d" \
-  "https://github.com/FFmpeg/nv-codec-headers/releases/download/n10.0.26.1/"
+  "299b2f4ccd1b94c274f6d94ed4f1c5b8" \
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
+
+download \
+  "zimg-release-2.7.4.tar.gz" \
+  "" \
+  "1757dcc11590ef3b5a56c701fd286345" \
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
+
+download \
+  "openjpeg-2.1.2.tar.gz" \
+  "" \
+  "40a7bfdcc66280b3c1402a0eb1a27624" \
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
+
+download \
+  "libwebp-0.6.1.tar.gz" \
+  "" \
+  "1c3099cd2656d0d80d3550ee29fc0f28" \
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
+
+download \
+  "vorbis-1.3.6.tar.gz" \
+  "" \
+  "03e967efb961f65a313459c5d0f4cbfb" \
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
+
+download \
+  "ogg-1.3.3.tar.gz" \
+  "" \
+  "b8da1fe5ed84964834d40855ba7b93c2" \
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
+
+download \
+  "Speex-1.2.0.tar.gz" \
+  "" \
+  "4bec86331abef56129f9d1c994823f03" \
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
+
+download \
+  "nv-codec-headers-8.1.24.12.tar.gz" \
+  "" \
+  "8229b8b6c2227f1b04889a1e538c05af" \
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
   "freetype-2.10.2.tar.gz" \
   "" \
   "b1cb620e4c875cd4d1bfa04945400945" \
-  "https://download.savannah.gnu.org/releases/freetype/"
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
   "fontconfig-2.12.1.tar.gz" \
   "" \
-  "nil" \
-  "https://www.freedesktop.org/software/fontconfig/release/"
+  "ce55e525c37147eee14cc2de6cc09f6c" \
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
   "opencore-amr-0.1.3.tar.xz" \
   "" \
   "3a0bc1092000dba56819cfaf263b981b" \
-  "https://johnvansickle.com/ffmpeg/git-source/"
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
   "vo-amrwbenc-0.1.3.tar.xz" \
   "" \
   "f2103c3a3aee75d6b18a0b61e05046fa" \
-  "https://johnvansickle.com/ffmpeg/git-source/"
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
   "xvidcore-1.3.7.tar.gz" \
   "" \
-  "nil" \
+  "f2103c3a3aee75d6b18a0b61e05046fa" \
   "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
   "frei0r-plugins-1.4.tar.xz" \
   "" \
-  "nil" \
+  "2e0313769765aba613bb0f03b4d198b7" \
   "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
   "n4.3.1.tar.gz" \
   "" \
   "426ca412ca61634a248c787e29507206" \
-  "https://github.com/FFmpeg/FFmpeg/archive"
+  "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 
 
