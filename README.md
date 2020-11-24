@@ -1,24 +1,16 @@
-FFmpeg static build
+FFmpeg with nvenc build
 ===================
-
-*STATUS*: community-supported
-
-Three scripts to make a static build of ffmpeg with all the latest codecs (webm + h264).
-
-Just follow the instructions below. Once you have the build dependencies,
-run ./build.sh, wait and you should get the ffmpeg binary in target/bin
-
+This is not a completly static build.
+If all goes well, at the end you have a ffmpeg binary with everything statically linked except the glibc and dynamic linker, with working NVIDIA support.
+The binary will work on any linux system running a newer version of glibc than the one used on the build system. (that is why I'm using ubuntu 14.04 on the docker image as it gives me more coverage)
 Build dependencies
 ------------------
 
     # Debian & Ubuntu
-    $ apt-get install build-essential curl tar libass-dev libtheora-dev libvorbis-dev libtool cmake automake autoconf
-
-    # OS X
-    # 1. install XCode
-    # 2. install XCode command line tools
-    # 3. install homebrew
-    # brew install openssl frei0r sdl2
+    $ apt-get install autoconf automake build-essential cmake libfreetype6-dev frei0r-plugins-dev libgpac-dev libsdl1.2-dev libtheora-dev libtool \
+    libva-dev libvdpau-dev libvo-amrwbenc-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev pkg-config texi2html libexpat1-dev \
+    zlib1g-dev libvpx-dev libxvidcore-dev libharfbuzz-dev libfontconfig-dev libopencore-amrnb-dev libopencore-amrwb-dev git wget gawk libass-dev\
+    libwebp-dev curl tar libspeex-dev libssl-dev gperf
 
 Build & "install"
 -----------------
@@ -44,67 +36,8 @@ Build in docker
 
     $ docker build -t ffmpeg-static .
     $ docker run -it ffmpeg-static
-    $ ./build-ubuntu.sh [-j <jobs>] [-B] [-d]
+    $ ./build.sh [-j <jobs>] [-B] [-d]
 
 The binaries will be created in `/ffmpeg-static/bin` directory.
 Method of getting them out of the Docker container is up to you.
 `/ffmpeg-static` is a Docker volume.
-
-Debug
------
-
-On the top-level of the project, run:
-
-    $ . env.source
-
-You can then enter the source folders and make the compilation yourself
-
-    $ cd build/ffmpeg-*
-    $ ./configure --prefix=$TARGET_DIR #...
-    # ...
-
-Remaining links
----------------
-
-I'm not sure it's a good idea to statically link those, but it probably
-means the executable won't work across distributions or even across releases.
-
-    # On Ubuntu 10.04:
-    $ ldd ./target/bin/ffmpeg
-    not a dynamic executable
-
-    # on OSX 10.6.4:
-    $ otool -L ffmpeg
-    ffmpeg:
-        /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 125.2.0)
-
-Community, bugs and reports
----------------------------
-
-This repository is community-supported. If you make a useful PR then you will
-be added as a contributor to the repo. All changes are assumed to be licensed
-under the same license as the project (ISC).
-
-As a contributor you can do whatever you want. Help maintain the scripts,
-upgrade dependencies and merge other people's PRs. Just be responsible and
-make an issue if you want to introduce bigger changes so we can discuss them
-beforehand.
-
-### TODO
-
- * Add some tests to check that video output is correctly generated
-   this would help upgrading the package without too much work
- * OSX's xvidcore does not detect yasm correctly
- * remove remaining libs (?)
-
-Related projects
-----------------
-
-* FFmpeg Static Builds - http://johnvansickle.com/ffmpeg/
-
-License
--------
-
-This project is licensed under the ISC. See the [LICENSE](LICENSE) file for
-the legalities.
-
