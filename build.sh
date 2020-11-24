@@ -244,7 +244,7 @@ download \
 download \
   "xvidcore-1.3.7.tar.gz" \
   "" \
-  "f2103c3a3aee75d6b18a0b61e05046fa" \
+  "cb0059a65c79256433c40f2e45d29e7e" \
   "https://github.com/chamchenko/ffmpeg-static/raw/master/libs/"
 
 download \
